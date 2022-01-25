@@ -1,0 +1,52 @@
+image:
+  repository: ghcr.io/gumigumi4f/gke-node-termination-notifier
+  tag: "master"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  limits:
+    cpu: 200m
+    memory: 32Mi
+
+nodeSelector: {}
+
+tolerations:
+  - effect: NoSchedule
+    operator: Exists
+  - effect: NoExecute
+    operator: Exists
+
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: cloud.google.com/gke-accelerator
+            operator: Exists
+        - matchExpressions:
+          - key: cloud.google.com/gke-preemptible
+            operator: Exists
+
+env:
+  - name: SLACK_WEBHOOK_URL
+    value: ""
+
+envFrom: []

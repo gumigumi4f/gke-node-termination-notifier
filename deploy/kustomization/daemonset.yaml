@@ -1,45 +1,43 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: node-termination-notifier
+  name: gke-node-termination-notifier
   namespace: kube-system
   labels:
-    k8s-app: node-termination-notifier
+    app.kubernetes.io/name: gke-node-termination-notifier
 spec:
   selector:
     matchLabels:
-      k8s-app: node-termination-notifier
-  updateStrategy:
-    type: RollingUpdate
+      app.kubernetes.io/name: gke-node-termination-notifier
   template:
     metadata:
       labels:
-        name: node-termination-notifier
-        k8s-app: node-termination-notifier
+        name: gke-node-termination-notifier
+        app.kubernetes.io/name: gke-node-termination-notifier
     spec:
+      hostNetwork: true
+      containers:
+        - image: "ghcr.io/gumigumi4f/gke-node-termination-notifier:master"
+          name: node-termination-notifier
+          env:
+            - name: SLACK_WEBHOOK_URL
+              value: ""
+          resources:
+            limits:
+              cpu: 200m
+              memory: 32Mi
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: cloud.google.com/gke-accelerator
-                operator: Exists
-            - matchExpressions:
-              - key: cloud.google.com/gke-preemptible
-                operator: Exists
+              - matchExpressions:
+                - key: cloud.google.com/gke-accelerator
+                  operator: Exists
+              - matchExpressions:
+                - key: cloud.google.com/gke-preemptible
+                  operator: Exists
       tolerations:
-      - effect: NoSchedule
-        operator: Exists
-      - effect: NoExecute
-        operator: Exists
-      hostNetwork: true
-      containers:
-      - image: "gumigumi4f/gke-node-termination-notifier"
-        name: node-termination-notifier
-        env:
-        - name: SLACK_WEBHOOK_URL
-          value: ""
-        resources:
-          limits:
-            cpu: 150m
-            memory: 30Mi
+        - effect: NoSchedule
+          operator: Exists
+        - effect: NoExecute
+          operator: Exists
