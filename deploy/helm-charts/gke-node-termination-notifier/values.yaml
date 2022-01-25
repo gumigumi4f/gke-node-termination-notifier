@@ -20,7 +20,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-resources: {}
+resources:
   limits:
     cpu: 200m
     memory: 48Mi
@@ -32,7 +32,6 @@ tolerations:
     operator: Exists
   - effect: NoExecute
     operator: Exists
-
 
 affinity:
   nodeAffinity:
