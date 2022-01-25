@@ -5,20 +5,22 @@ metadata:
   namespace: kube-system
   labels:
     app.kubernetes.io/name: gke-node-termination-notifier
+    app.kubernetes.io/instance: gke-node-termination-notifier
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: gke-node-termination-notifier
+      app.kubernetes.io/instance: gke-node-termination-notifier
   template:
     metadata:
       labels:
-        name: gke-node-termination-notifier
         app.kubernetes.io/name: gke-node-termination-notifier
+        app.kubernetes.io/instance: gke-node-termination-notifier
     spec:
       hostNetwork: true
       containers:
-        - image: "ghcr.io/gumigumi4f/gke-node-termination-notifier:master"
-          name: node-termination-notifier
+        - name: gke-node-termination-notifier
+          image: "ghcr.io/gumigumi4f/gke-node-termination-notifier:master"
           env:
             - name: SLACK_WEBHOOK_URL
               value: ""
