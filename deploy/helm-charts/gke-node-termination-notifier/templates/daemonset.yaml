@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ include "gke-node-termination-notifier.fullname" . }}
-  namespace: kube-system
   labels:
     {{- include "gke-node-termination-notifier.labels" . | nindent 4 }}
 spec:
