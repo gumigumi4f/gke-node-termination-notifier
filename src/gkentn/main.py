@@ -1,4 +1,5 @@
 import os
+import time
 
 from gkentn.core import Handler, Notifier
 from gkentn.utils.logger import get_logger
@@ -19,6 +20,9 @@ def main() -> None:
 
     state = handler.wait()  # wait for termination
     notifier.notify(state)  # notify
+
+    while True:
+        time.sleep(1000)
 
 
 if __name__ == "__main__":
