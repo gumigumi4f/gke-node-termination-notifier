@@ -15,10 +15,14 @@ def main() -> None:
 
     slack_webhook_url = os.environ[SLACK_WEBHOOK_URL_ENV]
 
+    logger.info("Initialize handler")
     handler = Handler(logger)
+    logger.info("Initialize notifier")
     notifier = Notifier(slack_webhook_url, logger)
 
+    logger.info("Wait for termination")
     state = handler.wait()  # wait for termination
+    logger.info("Notify termination")
     notifier.notify(state)  # notify
 
     while True:

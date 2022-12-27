@@ -104,7 +104,7 @@ class Handler:
             self._update_state()
 
             if self._state.termination_time is not None:
-                self.logger.info("termination detected")
+                self.logger.info("Termination detected")
                 return self._state
 
             if self._state.last_updated_at < datetime.datetime.now() - datetime.timedelta(seconds=60):
