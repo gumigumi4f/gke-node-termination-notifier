@@ -43,6 +43,9 @@ affinity:
         - matchExpressions:
           - key: cloud.google.com/gke-preemptible
             operator: Exists
+        - matchExpressions:
+          - key: cloud.google.com/gke-spot
+            operator: Exists
 
 env:
   - name: SLACK_WEBHOOK_URL
