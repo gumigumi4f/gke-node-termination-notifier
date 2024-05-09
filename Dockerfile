@@ -1,4 +1,4 @@
-FROM python:3.9-slim as builder
+FROM python:3.11-slim as builder
 
 WORKDIR /gkentn
 
@@ -9,7 +9,7 @@ RUN pip3 install -U pip \
       && pip3 install poetry \
       && poetry build -f wheel
 
-FROM python:3.9-alpine
+FROM python:3.11-alpine
 
 WORKDIR /gkentn
 

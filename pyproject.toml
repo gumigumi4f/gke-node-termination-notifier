@@ -3,31 +3,23 @@ name = "gke-node-termination-notifier"
 version = "0.1.0"
 description = ""
 authors = ["gumigumi4f <gumigumi4f@gmail.com>"]
-packages = [
-    {include="gkentn", from="src"},
-]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-slack-sdk = "^3.13.0"
-requests = "^2.27.1"
+python = ">=3.10,<3.12"
+slack-sdk = "^3.27.1"
+requests = "^2.31.0"
 
-[tool.poetry.dev-dependencies]
-pyproject-flake8 = "^0.0.1-alpha.2"
-black = "^21.12b0"
-isort = "^5.10.1"
-mypy = "^0.920"
-types-requests = "^2.27.7"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.poetry.group.dev.dependencies]
+pyproject-flake8 = "^7.0.0"
+black = "^24.4.2"
+isort = "^5.13.2"
+mypy = "^1.10.0"
+types-requests = "^2.31.0.20240406"
 
 [tool.poetry.scripts]
 gkentn = "gkentn.main:main"
 
 [tool.black]
-target-version = ['py39']
 line-length = 120
 
 [tool.isort]
@@ -44,3 +36,7 @@ ignore = "E203,E266,E501,W503,"
 no_strict_optional = true
 ignore_missing_imports = true
 check_untyped_defs = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
