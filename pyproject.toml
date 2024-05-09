@@ -3,6 +3,9 @@ name = "gke-node-termination-notifier"
 version = "0.1.0"
 description = ""
 authors = ["gumigumi4f <gumigumi4f@gmail.com>"]
+packages = [
+    {include="gkentn", from="src"},
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
