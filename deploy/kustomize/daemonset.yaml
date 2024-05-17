@@ -33,9 +33,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                - key: cloud.google.com/gke-accelerator
-                  operator: Exists
-              - matchExpressions:
                 - key: cloud.google.com/gke-preemptible
                   operator: Exists
               - matchExpressions:
